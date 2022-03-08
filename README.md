@@ -11,6 +11,9 @@
   <script src="https://unpkg.com/rivet-core@2.0.0-beta/js/rivet.min.js"></script>
   <script>Rivet.init();</script>
 ```       
+- For an interactive view of Rivet components, see the components library https://v2.rivet.iu.edu/docs/components/
+- Header https://v2.rivet.iu.edu/docs/components/header/
+- Footer https://v2.rivet.iu.edu/docs/components/footer/
 
 #### Source
 - "src" contains cherry-picked components in "raw" form from https://github.com/indiana-university/rivet-source/ 
