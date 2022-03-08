@@ -5,7 +5,7 @@
 
 #### Installation
 - Use "dist" components (e.g., header, footer) for plug-n-play HTML (more components will be added as needed)      
-- Add "dist/rivet-iul.css" file to your application's "head". This CSS is designed so that it will NOT override any other application components.   
+- Add relevant CSS into a file (e.g., rivet-iul.css) to call from your application's "head". This CSS is designed so that it will NOT override any other application components.   
 - Add Rivet javascript to your code (usually just before the closing "body" tag). 
 ```  
   <script src="https://unpkg.com/rivet-core@2.0.0-beta/js/rivet.min.js"></script>
