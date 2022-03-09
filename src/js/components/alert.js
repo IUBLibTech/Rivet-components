@@ -1,120 +1,140 @@
-/**
+/******************************************************************************
  * Copyright (C) 2018 The Trustees of Indiana University
  * SPDX-License-Identifier: BSD-3-Clause
- */
+ *****************************************************************************/
 
-// eslint-disable-next-line no-unused-vars
-var Alert = (function() {
-  'use strict';
+import Component from './component'
 
-  // Selectors
-  
-  /**
-   * DEPRECATED: .rvt-alert__dismiss will be removed in the future in favor of
-   * using the more consistent data attribute data-alert-close.
-   */
-  var SELECTORS = '[data-alert-close], .rvt-alert__dismiss';
+/******************************************************************************
+ * The alert component displays brief important messages to the user like
+ * errors or action confirmations.
+ *
+ * @see https://v2.rivet.iu.edu/docs/components/alert/
+ *****************************************************************************/
 
-  /**
-   * Kicks off the Alert component and sets up all event listeners
+export default class Alert extends Component {
+
+  /****************************************************************************
+   * Gets the alert's CSS selector.
    *
-   * @param {HTMLElement} context - An optional DOM element that the
-   * alert can be initialized on. All event listeners will be attached
-   * to this element. Usually best to just leave it to default
-   * to the document.
-   */
-  function init(context) {
-    // Optional element to bind the event listeners to
-    if (context === undefined) {
-      context = document;
-    }
+   * @static
+   * @returns {string} The CSS selector
+   ***************************************************************************/
 
-    // Destroy any currently initialized alerts
-    destroy(context);
-
-    document.addEventListener('click', _handleClick, false);
+  static get selector () {
+    return '[data-rvt-alert]'
   }
 
-  /**
-   * Cleans up any currently initialized Alerts
+  /****************************************************************************
+   * Gets an object containing the methods that should be attached to the
+   * component's root DOM element. Used by wicked-elements to initialize a DOM
+   * element with Web Component-like behavior.
    *
-   * @param {HTMLElement} context - An optional DOM element. This only
-   * needs to be passed in if a DOM element was passed to the init()
-   * function. If so, the element passed in must be the same element
-   * that was passed in at initialization so that the event listeners can
-   * be properly removed.
-   */
-  function destroy(context) {
-    if (context === undefined) {
-      context = document;
-    }
+   * @static
+   * @returns {Object} Object with component methods
+   ***************************************************************************/
 
-    document.removeEventListener('click', _handleClick, false);
-  }
+  static get methods () {
+    return {
 
-  var _handleClick = function(event) {
-    var dismissButton = event.target.closest(SELECTORS);
+      /************************************************************************
+       * Initializes the alert.
+       ***********************************************************************/
 
-    // If the target wasn't the dismiss button bail.
-    if (!dismissButton) return;
+      init () {
+        this._initSelectors()
+        this._initElements()
 
-    // Get the parent node of the dsimiss button i.e. the alert container
-    var alertThatWasClicked = dismissButton.parentNode;
+        Component.bindMethodToDOMElement(this, 'dismiss', this.dismiss)
+      },
 
-    dismissAlert(alertThatWasClicked);
-  };
+      /************************************************************************
+       * Initializes alert child element selectors.
+       *
+       * @private
+       ***********************************************************************/
 
-  /**
-   * Dismisses the alert
-   * @param {String} id - A unique string used for the alert's id attribute
-   * @param {Function} callback - A function that is executed after alert
-   * is closed.
-   */
-  function dismissAlert(id, callback) {
-    /**
-     * DEPRECATED: This is to add backwards compatibility for the older API
-     * where you needed to pass in the alert Object/HTMLElement. This should
-     * be deprecated in the next major version.
-     */
-    if (typeof id === 'object' && id.nodeType === 1) {
-      var alertEl = id;
-      id = alertEl.getAttribute('id');
+      _initSelectors () {
+        this.closeButtonAttribute = 'data-rvt-alert-close'
 
-      // if an id isn't provided try aria-labelledby
-      if (!id) {
-        id = alertEl.getAttribute('aria-labelledby');
+        this.closeButtonSelector = `[${this.closeButtonAttribute}]`
+      },
+
+      /************************************************************************
+       * Initializes alert child elements.
+       *
+       * @private
+       ***********************************************************************/
+
+      _initElements () {
+        this.closeButton = this.element.querySelector(this.closeButtonSelector)
+      },
+
+      /************************************************************************
+       * Called when the alert is added to the DOM.
+       ***********************************************************************/
+
+      connected () {
+        Component.dispatchComponentAddedEvent(this.element)
+      },
+
+      /************************************************************************
+       * Called when the alert is removed from the DOM.
+       ***********************************************************************/
+
+      disconnected () {
+        Component.dispatchComponentRemovedEvent(this.element)
+      },
+
+      /************************************************************************
+       * Handles click events broadcast to the alert.
+       *
+       * @param {Event} event - Click event
+       ***********************************************************************/
+
+      onClick (event) {
+        if (this._clickOriginatedInsideCloseButton(event)) { this.dismiss() }
+      },
+
+      /************************************************************************
+       * Returns true if the given click event originated inside the
+       * alert's close button.
+       *
+       * @private
+       * @param {Event} event - Click event
+       * @returns {boolean} Click originated inside content area
+       ***********************************************************************/
+
+      _clickOriginatedInsideCloseButton (event) {
+        return this.closeButton && this.closeButton.contains(event.target)
+      },
+
+      /************************************************************************
+       * Dismisses the alert.
+       ***********************************************************************/
+
+      dismiss () {
+        if (!this._dismissEventDispatched()) { return }
+
+        this.element.remove()
+      },
+
+      /************************************************************************
+       * Returns true if the custom "dismiss" event was successfully
+       * dispatched.
+       *
+       * @private
+       * @returns {boolean} Event successfully dispatched
+       ***********************************************************************/
+
+      _dismissEventDispatched () {
+        const dispatched = Component.dispatchCustomEvent(
+          'alertDismissed',
+          this.element
+        )
+
+        return dispatched
       }
-
-      // if aria-labelledby and id aren't provided throw an error
-      if (!id) {
-        throw new Error(
-          'Please proved an id attribute for the alert you want to dismiss.'
-        );
-      }
-    }
-
-    var alert = document.querySelector('[aria-labelledby="' + id + '"]');
-
-    if (!alert) {
-      alert = document.getElementById(id);
-    }
-
-    if (!alert) {
-      throw new Error(
-        'Could not find an alert with the id of ' + id + ' to dismiss.'
-      );
-    }
-
-    alert.parentNode.removeChild(alert);
-
-    if (callback && typeof callback === 'function') {
-      callback();
     }
   }
-
-  return {
-    init: init,
-    destroy: destroy,
-    dismiss: dismissAlert
-  };
-})();
+}
