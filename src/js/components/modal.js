@@ -1,386 +1,493 @@
-/**
+/******************************************************************************
  * Copyright (C) 2018 The Trustees of Indiana University
  * SPDX-License-Identifier: BSD-3-Clause
- */
+ *****************************************************************************/
 
-// eslint-disable-next-line no-unused-vars
-var Modal = (function() {
-  'use strict';
+import Component from './component'
+import keyCodes from '../utilities/keyCodes'
 
-  var KEYS = {
-    tab: 9,
-    escape: 27
-  };
+/******************************************************************************
+ * The modal component can be used to present content in a smaller window that
+ * is displayed on top of the main application or site content.
+ *
+ * @see https://v2.rivet.iu.edu/docs/components/modal/
+ *****************************************************************************/
 
-  // Selectors
-  var TRIGGER_SELECTOR = '[data-modal-trigger]';
-  var TRIGGER_ATTR = 'data-modal-trigger';
-  var CLOSE_ATTR = 'data-modal-close';
-  var CLOSE_SELECTOR = '[data-modal-close]';
-  var MODAL_SELECTOR = '.rvt-modal, .modal';
+export default class Modal extends Component {
 
-  // Anything that is focus-able
-  var ALL_FOCUSABLE_ELS = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="-1"]';
-
-  /**
-   * These variables are used to keep track of currently active/open modals.
-   * They are available in the root scope of the Modal closure so that
-   * all of the Modal's methods have access to them.
+  /****************************************************************************
+   * Gets the modal's CSS selector.
    *
-   * TODO: This probably isn't the best solutions as it makes most of the
-   * Modal methods impure. I would be interested in how we might get rid
-   * of the need for these global (to the Modal) variables.
-   */
-  var activeTrigger;
-  var activeModal;
+   * @static
+   * @returns {string} The CSS selector
+   ***************************************************************************/
 
-  /**
-   * @param {String} id - A unique string used for a modal's id and/or
-   * data-modal-trigger attribute.
-   */
-  function _createModalObject(id) {
-    var modal = {};
-
-    modal.trigger =
-      document.querySelector('[' + TRIGGER_ATTR + '="' + id + '"]');
-
-    modal.body = document.getElementById(id);
-
-    return modal.trigger && modal.body ? modal : null;
+  static get selector () {
+    return '[data-rvt-modal]'
   }
 
-  /**
-   * Opens the modal
-   * @param {String} id - A unique string used for the modal's id attribute
-   * @param {Function} callback - A function that is executed after modal
-   * is opened.
-   */
-  function open(id, callback) {
-    /**
-     * DEPRECATED: This is to add backwards compatibility for the older API
-     * where you needed to pass in the modal Object/HTMLElement. This should
-     * be deprecated in the next major version.
-     */
-    if (typeof id === 'object' && id.nodeType === 1) {
-      id = id.getAttribute('id');
+  /****************************************************************************
+   * Gets an object containing the methods that should be attached to the
+   * component's root DOM element. Used by wicked-elements to initialize a DOM
+   * element with Web Component-like behavior.
+   *
+   * @static
+   * @returns {Object} Object with component methods
+   ***************************************************************************/
 
-      if (!id) {
-        throw new Error('Please proved an id attribute for the modal you want to open.');
+  static get methods () {
+    return {
+
+      /************************************************************************
+       * Initializes the modal.
+       ***********************************************************************/
+
+      init () {
+        this._initSelectors()
+        this._initElements()
+        this._initProperties()
+        this._bindExternalEventHandlers()
+
+        Component.bindMethodToDOMElement(this, 'open', this.open)
+        Component.bindMethodToDOMElement(this, 'close', this.close)
+        Component.bindMethodToDOMElement(this, 'focusTrigger', this.focusTrigger)
+        Component.bindMethodToDOMElement(this, 'focusModal', this.focusModal)
+      },
+
+      /************************************************************************
+       * Initializes modal child element selectors.
+       *
+       * @private
+       ***********************************************************************/
+
+      _initSelectors () {
+        this.modalAttribute = 'data-rvt-modal'
+        this.innerModalAttribute = 'data-rvt-modal-inner'
+        this.triggerAttribute = 'data-rvt-modal-trigger'
+        this.closeButtonAttribute = 'data-rvt-modal-close'
+        this.dialogAttribute = this.dialogAttribute
+
+        this.innerModalSelector = `[${this.innerModalAttribute}]`
+        this.triggerSelector = `[${this.triggerAttribute}]`
+        this.closeButtonSelector = `[${this.closeButtonAttribute}]`
+      },
+
+      /************************************************************************
+       * Initializes modal child elements.
+       *
+       * @private
+       ***********************************************************************/
+
+      _initElements () {
+        const modalId = this.element.getAttribute(this.modalAttribute)
+
+        this.innerModal = this.element.querySelector(this.innerModalSelector)
+        this.triggerButton = document.querySelector(`[${this.triggerAttribute} = "${modalId}"]`)
+        this.closeButtons = this.element.querySelectorAll(this.closeButtonSelector)
+      },
+
+      /************************************************************************
+       * Initializes modal state properties.
+       *
+       * @private
+       ***********************************************************************/
+
+      _initProperties () {
+        this.id = this.element.getAttribute('id')
+        this.isOpen = false
+        this.isDialog = this.element.hasAttribute(this.dialogAttribute)
+      },
+
+      /************************************************************************
+       * Binds the modal instance to handler methods for relevant events that
+       * originate outside the component's root DOM element.
+       *
+       * @private
+       ***********************************************************************/
+
+      _bindExternalEventHandlers () {
+        this._onTriggerClick = this._onTriggerClick.bind(this)
+        this._onDocumentClick = this._onDocumentClick.bind(this)
+      },
+
+      /************************************************************************
+       * Called when the modal is added to the DOM.
+       ***********************************************************************/
+
+      connected () {
+        Component.dispatchComponentAddedEvent(this.element)
+
+        this._addTriggerEventHandlers()
+        this._addDocumentEventHandlers()
+
+        if (this._shouldBeOpenByDefault()) { this.open() }
+      },
+
+      /************************************************************************
+       * Returns true if the modal should be open on page load.
+       *
+       * @private
+       * @returns {boolean} Modal should be open
+       ***********************************************************************/
+
+      _shouldBeOpenByDefault () {
+        return this.element.hasAttribute('data-rvt-modal-open-on-init')
+      },
+
+      /************************************************************************
+       * Adds event handlers for the trigger button. The trigger button event
+       * handlers must be set manually rather than using onClick because the
+       * trigger button exists outside the modal component's root DOM element.
+       *
+       * @private
+       ***********************************************************************/
+
+      _addTriggerEventHandlers () {
+        if (!this._hasTriggerButton()) { return }
+
+        this.triggerButton.addEventListener('click', this._onTriggerClick, false)
+      },
+
+      /************************************************************************
+       * Returns true if the modal has an associated trigger button.
+       *
+       * @private
+       * @returns {boolean} Modal has trigger button
+       ***********************************************************************/
+
+      _hasTriggerButton () {
+        return this.triggerButton
+      },
+
+      /************************************************************************
+       * Adds event handlers to the document that are related to the modal.
+       *
+       * @private
+       ***********************************************************************/
+
+      _addDocumentEventHandlers () {
+        document.addEventListener('click', this._onDocumentClick, false)
+      },
+
+      /************************************************************************
+       * Called when the modal is removed from the DOM.
+       ***********************************************************************/
+
+      disconnected () {
+        Component.dispatchComponentRemovedEvent(this.element)
+
+        this._removeTriggerEventHandlers()
+        this._removeDocumentEventHandlers()
+      },
+
+      /************************************************************************
+       * Removes trigger button event handlers.
+       *
+       * @private
+       ***********************************************************************/
+
+      _removeTriggerEventHandlers () {
+        if (!this._hasTriggerButton()) { return }
+
+        this.triggerButton.removeEventListener('click', this._onTriggerClick, false)
+      },
+
+      /************************************************************************
+       * Removes document event handlers related to the modal.
+       *
+       * @private
+       ***********************************************************************/
+
+      _removeDocumentEventHandlers () {
+        document.removeEventListener('click', this._onDocumentClick, false)
+      },
+
+      /************************************************************************
+       * Handles click events broadcast to the modal. For click events related
+       * to the trigger button and document, see the _onTriggerClick() and
+       * _onDocumentClick() methods, respectively.
+       *
+       * @param {Event} event - Click event
+       ***********************************************************************/
+
+      onClick (event) {
+        if (!this._isOpen()) { return }
+
+        if (!this._clickOriginatedInCloseButton(event)) { return }
+
+        this.close()
+      },
+
+      /************************************************************************
+       * Returns true if the modal is open.
+       *
+       * @private
+       * @returns {boolean} Modal is open
+       ***********************************************************************/
+
+      _isOpen () {
+        return this.isOpen
+      },
+
+      /************************************************************************
+       * Returns true if the given click event originated inside one of the
+       * modal's "close" buttons.
+       *
+       * @private
+       * @param {Event} event - Click event
+       * @returns {boolean} Click originated inside close button
+       ***********************************************************************/
+
+      _clickOriginatedInCloseButton (event) {
+        return event.target.closest(this.closeButtonSelector)
+      },
+
+      /************************************************************************
+       * Handles click events broadcast to the modal's trigger button.
+       *
+       * @param {Event} event - Click event
+       ***********************************************************************/
+
+      _onTriggerClick (event) {
+        this._isOpen()
+          ? this.close()
+          : this.open()
+      },
+
+      /************************************************************************
+       * Handles click events broadcast to the document that are related to
+       * the modal but did not originate inside the modal itself.
+       *
+       * @param {Event} event - Click event
+       ***********************************************************************/
+
+      _onDocumentClick (event) {
+        if (this._clickOriginatedInsideModalOrTrigger(event)) { return }
+
+        if (!this._isOpen()) { return }
+
+        if (this._isDialog()) { return }
+
+        this.close()
+      },
+
+      /************************************************************************
+       * Returns true if the given click event originated inside the inner
+       * modal or modal trigger button.
+       *
+       * @param {Event} event - Click event
+       * @returns {boolean} Click originated inside inner modal or trigger
+       ***********************************************************************/
+
+      _clickOriginatedInsideModalOrTrigger (event) {
+        return event.target.closest(this.innerModalSelector) ||
+               event.target.closest(this.triggerSelector)
+      },
+
+      /************************************************************************
+       * Returns true if the modal is a dialog. (Dialog modals can't be closed
+       * by clicking outside the modal or hitting the Escape key.)
+       *
+       * @private
+       * @returns {boolean} Modal is dialog
+       ***********************************************************************/
+
+      _isDialog () {
+        return this.isDialog
+      },
+
+      /************************************************************************
+       * Handles keydown events broadcast to the modal.
+       *
+       * @param {Event} event - Keydown event
+       ***********************************************************************/
+
+      onKeydown (event) {
+        switch (event.keyCode) {
+          case keyCodes.tab:
+            this._setFocusableChildElements()
+            this._shiftKeyPressed(event)
+              ? this._handleBackwardTab(event)
+              : this._handleForwardTab(event)
+            break
+
+          case keyCodes.escape:
+            if (!this._isDialog()) { this.close() }
+            break
+        }
+      },
+
+      /************************************************************************
+       * Sets the modal's list of focusable child elements.
+       *
+       * @private
+       ***********************************************************************/
+
+      _setFocusableChildElements () {
+        this.focusableChildElements = this.element.querySelectorAll(
+          'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="-1"]'
+        )
+
+        this.firstFocusableChildElement = this.focusableChildElements[0]
+        this.lastFocusableChildElement = this.focusableChildElements[this.focusableChildElements.length - 1]
+      },
+
+      /************************************************************************
+       * Returns true if Shift was held during the given keydown event.
+       *
+       * @private
+       * @param {Event} event - Keydown event
+       * @returns {boolean} Shift key pressed
+       ***********************************************************************/
+
+      _shiftKeyPressed (event) {
+        return event.shiftKey
+      },
+
+      /************************************************************************
+       * Handles the user tabbing backward through the modal, trapping focus
+       * within the modal if necessary.
+       *
+       * @private
+       * @param {Event} event - Keydown event
+       ***********************************************************************/
+
+      _handleBackwardTab (event) {
+        if (this._shouldTrapBackwardTabFocus()) {
+          event.preventDefault()
+          this.lastFocusableChildElement.focus()
+        }
+      },
+
+      /************************************************************************
+       * Returns true if focus should be trapped to prevent the user from
+       * tabbing backward out of the modal.
+       *
+       * @private
+       * @returns {boolean} Modal is dialog
+       ***********************************************************************/
+
+      _shouldTrapBackwardTabFocus () {
+        return document.activeElement === this.firstFocusableChildElement ||
+               document.activeElement === this.element
+      },
+
+      /************************************************************************
+       * Handles the user tabbing forward through the modal, trapping focus
+       * within the modal if necessary.
+       *
+       * @private
+       * @param {Event} event - Keydown event
+       ***********************************************************************/
+
+      _handleForwardTab (event) {
+        if (this._shouldTrapForwardTabFocus()) {
+          event.preventDefault()
+          
+          this.firstFocusableChildElement.focus()
+        }
+      },
+
+      /************************************************************************
+       * Returns true if focus should be trapped to prevent the user from
+       * tabbing forward out of the modal.
+       *
+       * @private
+       * @returns {boolean} Modal is dialog
+       ***********************************************************************/
+
+      _shouldTrapForwardTabFocus () {
+        return document.activeElement === this.lastFocusableChildElement
+      },
+
+      /************************************************************************
+       * Opens the modal.
+       ***********************************************************************/
+
+      open () {
+        if (this._isOpen()) { return }
+
+        if (!this._eventDispatched('modalOpened')) { return }
+
+        this._setOpenState()
+        this.focusModal()
+      },
+
+      /************************************************************************
+       * Sets the modal's state properties to represent it being open.
+       *
+       * @private
+       ***********************************************************************/
+
+      _setOpenState () {
+        this.isOpen = true
+        this.element.removeAttribute('hidden')
+        document.body.classList.add('rvt-modal-open')
+      },
+
+      /************************************************************************
+       * Moves focus to the modal.
+       ***********************************************************************/
+
+      focusModal () {
+        this.element.focus()
+      },
+
+      /************************************************************************
+       * Closes the modal.
+       ***********************************************************************/
+
+      close () {
+        if (!this._isOpen()) { return }
+
+        if (!this._eventDispatched('modalClosed')) { return }
+
+        this._setClosedState()
+
+        if (this._hasTriggerButton()) {
+          this.focusTrigger()
+        }
+      },
+
+      /************************************************************************
+       * Sets the modal's state properties to represent it being closed.
+       *
+       * @private
+       ***********************************************************************/
+
+      _setClosedState () {
+        this.isOpen = false
+        this.element.setAttribute('hidden', '')
+        document.body.classList.remove('rvt-modal-open')
+      },
+
+      /************************************************************************
+       * Moves focus to the modal's trigger button.
+       ***********************************************************************/
+
+      focusTrigger () {
+        if (!this._hasTriggerButton()) {
+          console.warn(`Could not find a trigger button with for modal ID '${this.id}'`)
+          return
+        }
+
+        this.triggerButton.focus()
+      },
+
+      /************************************************************************
+       * Returns true if the custom event with the given name was successfully
+       * dispatched.
+       *
+       * @private
+       * @param {string} name - Event name
+       * @returns {boolean} Event successfully dispatched
+       ***********************************************************************/
+
+      _eventDispatched (name) {
+        const dispatched = Component.dispatchCustomEvent(name, this.element)
+
+        return dispatched
       }
     }
-    /**
-     * END DEPRECATION
-     */
-
-    var modal = _createModalObject(id);
-
-    if (!modal) return;
-
-    if (!modal.body) {
-      throw new Error('Could not find a modal with the id of ' + id + ' to open.');
-    }
-
-    activeModal = modal.body;
-
-    activeTrigger = modal.trigger;
-
-    modal.body.setAttribute('aria-hidden', 'false');
-
-    // Sets a class on the body to handle overflow and scroll.
-    document.body.classList.add('rvt-modal-open');
-
-    /**
-     * Emit a custom 'modalOpen' event and send along the modal's
-     * id attribute in the event.detail.name()
-     */
-    // eslint-disable-next-line no-undef
-    fireCustomEvent(activeModal, 'id', 'modalOpen');
-
-    if (callback && typeof callback === 'function') {
-      callback();
-    }
   }
-
-  /**
-   * Closes the modal
-   * @param {String} id - A unique string used for the modal's id attribute
-   * @param {Function} callback - A function that is executed after modal is closed.
-   */
-  function close(id, callback) {
-    /**
-     * DEPRECATED: This is to add backwards compatibility for the older API
-     * where you needed to pass in the modal Object/HTMLElement. This should
-     * be deprecated in the next major version.
-     */
-    if (typeof id === 'object' && id.nodeType === 1) {
-      id = id.getAttribute('id');
-
-      if (!id) {
-        throw new Error('Please proved an id attribute for the modal you want to close.');
-      }
-    }
-    /**
-     * END DEPRECATION
-     */
-
-    var modal = _createModalObject(id);
-
-    if (!modal) return;
-
-    if (!modal.body) {
-      throw new Error('Could not find a modal with the id of ' + id + ' to close.');
-    }
-
-    modal.body.setAttribute('aria-hidden', 'true');
-
-    document.body.classList.remove('rvt-modal-open');
-    
-    /**
-     * Emit a custom 'modalClose' event and send along the modal's
-     * id attribute in the event.detail.name()
-     */
-    // eslint-disable-next-line no-undef
-    fireCustomEvent(activeModal, 'id', 'modalClose');
-
-    if (callback && typeof callback === 'function') {
-      callback();
-    }
-  }
-
-  /**
-   * Focuses the currently active modal trigger if it exists. This is a
-   * Helper function that can be used in the callback of the close() method
-   * to move focus back to corresponding trigger if needed.
-   * @param {String} id - A unique string that is used for the modal
-   * trigger's data-modal-trigger attribute.
-   */
-  function focusTrigger(id) {
-    var trigger =
-      document.querySelector('[data-modal-trigger="' + id + '"');
-
-    if (!trigger) {
-      throw new Error('Could not find a modal trigger with the id of ' + id);
-    }
-
-    activeTrigger = trigger;
-
-    trigger.focus();
-  }
-
-  /**
-   * Focuses the currently open modal if it exists. Can be used
-   * to programmatically focus a modal after opening. For instance, in the
-   * callback for Modal.open().
-   * @param {String} id - A unique string that used for the modal's id
-   * attribute.
-   */
-  function focusModal(id) {
-    var modal =
-      document.getElementById(id);
-
-    if (!modal) {
-      throw new Error('Could not find a modal with the id of ' + id);
-    }
-
-    activeModal = modal;
-
-    modal.focus();
-  }
-
-  /**
-   * Handles all click interactions for modals.
-   * @param {Event} event - The event object.
-   */
-  function _handleClick(event) {
-    /**
-     * Stores a boolean in the event object, so we can check to see
-     * if we should prevent the event from bubbling up when the user
-     * clicks inside of the inner modal element.
-     */
-    event.target.closest('.rvt-modal__inner, .modal__inner') !== null ?
-      event.clickedInModal = true:
-      event.clickedInModal = false;
-
-    if (event.clickedInModal) {
-      event.stopPropagation();
-    }
-
-    /**
-     * Stores a reference to the event target if it is any of the following:
-     * A  Modal trigger button, a modal close button, or the modal background.
-     */
-    var matchingSelectors =
-      TRIGGER_SELECTOR + ', ' + CLOSE_SELECTOR + ', ' + MODAL_SELECTOR;
-
-    var trigger =
-      event.target.closest(matchingSelectors);
-
-    if (!trigger) {
-      return;
-    }
-
-    // Sets the id based on whatever the matching target was.
-    var id = trigger.getAttribute(TRIGGER_ATTR) ||
-      (trigger.getAttribute(CLOSE_ATTR) && trigger.getAttribute(CLOSE_ATTR) !== 'close' ?
-        trigger.getAttribute(CLOSE_ATTR) : false) ||
-        event.target.closest(MODAL_SELECTOR);
-
-    switch (trigger !== null) {
-      case trigger.hasAttribute(TRIGGER_ATTR):
-        open(id);
-
-        activeModal.focus();
-
-        break;
-      case trigger.hasAttribute(CLOSE_ATTR):
-        event.preventDefault();
-
-        close(id);
-        
-        // Check to make sure modal was opened via a trigger element.
-        if (activeTrigger !== null) activeTrigger.focus();
-
-        break;
-      case trigger === id && !event.clickedInModal:
-        // If the modal is a dialog bail
-        if (trigger.hasAttribute('data-modal-dialog')) return;
-
-        close(id);
-
-        activeTrigger.focus();
-
-        break;
-      default:
-        return;
-    }
-  }
-
-  /**
-   * A helper function that handles focus trapping for forward (default)
-   * tab key press.
-   * @param {HTMLElement} first - first focus-able HTMLElement in an array
-   * of all focus-able elements.
-   * @param {HTMLElement} last - last focus-able HTMLElement in an array
-   * of focus-able elements
-   * @param {Event} event - The event object
-   */
-  function _handleBackwardTab(first, last, event) {
-    if (document.activeElement === first || document.activeElement === activeModal) {
-      event.preventDefault();
-      last.focus();
-    }
-  }
-
-  /**
-   * A helper function that handles focus trapping for backward (with the
-   * shift key) tab key press.
-   * @param {HTMLElement} first - first focus-able HTMLElement in an array
-   * of all focus-able elements.
-   * @param {HTMLElement} last - last focus-able HTMLElement in an array
-   * of focus-able elements
-   * @param {Event} event - The event object
-   */
-  function _handleForwardTab(first, last, event) {
-    if (document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  }
-
-  /**
-   * Handles all keyboard interaction required for the modal.
-   * @param {Event} event - The event object
-   */
-  function _handleKeydown(event) {
-    // Do not continue if key stroke is anything other than Escape or Tab
-    var currentModal = event.target.closest(MODAL_SELECTOR);
-
-    if (!currentModal) return;
-
-    switch (event.keyCode) {
-      case KEYS.tab:
-
-        /**
-         * Get all focus-able elements in the modal and convert the
-         * resulting nodeList to an Array.
-         */
-        var focusables =
-          Array
-            .prototype
-            .slice
-            .call(currentModal.querySelectorAll(ALL_FOCUSABLE_ELS));
-
-        var firstFocusable = focusables[0];
-
-        var lastFocusable = focusables[focusables.length - 1];
-
-        event.shiftKey ?
-          _handleBackwardTab(firstFocusable, lastFocusable, event) :
-          _handleForwardTab(firstFocusable, lastFocusable, event);
-
-        break;
-      case KEYS.escape:
-        // If it's a modal dialog, bail
-        if (activeModal.hasAttribute('data-modal-dialog')) return;
-
-        close(activeModal.id);
-
-        if (activeTrigger !== null) activeTrigger.focus();
-
-        break;
-      default:
-        break;
-    }
-  }
-
-  /**
-   * Destroys any initialized Modals
-   * @param {HTMLElement} context - An optional DOM element. This only
-   * needs to be passed in if a DOM element was passed to the init()
-   * function. If so, the element passed in must be the same element
-   * that was passed in at initialization so that the event listeners can
-   * be properly removed.
-   */
-  function destroy(context) {
-    // Optional element to bind the event listeners to
-    if (context === undefined) {
-      context = document;
-    }
-
-    // Cleans up event listeners
-    context.removeEventListener('click', _handleClick, false);
-    context.removeEventListener('keydown', _handleKeydown, false);
-  }
-
-  /**
-   * Initializes the modal plugin
-   * @param {HTMLElement} context - An DOM element initialize the modal
-   * on. Although it is possible to only initialize the modal on a specific
-   * element for instance, <div id="my-div">Modals only work here</div>,
-   * We recommend initializing the modal without passing the context argument
-   * and letting all event listeners get attached to the document instead.
-   */
-  function init(context) {
-    // Optional element to bind the event listeners to
-    if (context === undefined) {
-      context = document;
-    }
-
-    // Destroy any initialized modals
-    destroy(context);
-
-    // Set up event listeners
-    context.addEventListener('click', _handleClick, false);
-    context.addEventListener('keydown', _handleKeydown, false);
-  }
-
-  // Returns public APIs
-  return {
-    init: init,
-    destroy: destroy,
-    open: open,
-    close: close,
-    focusTrigger: focusTrigger,
-    focusModal: focusModal
-  }
-})();
+}

@@ -1,0 +1,75 @@
+// Copyright (C) 2018 The Trustees of Indiana University
+// SPDX-License-Identifier: BSD-3-Clause
+
+@use '../core' as *;
+@use 'sass:map';
+@use 'sass:math';
+
+.#{$prefix}-pagination {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+
+  &__item {
+    line-height: 1;
+    margin-top: 0;
+
+    a {
+      color: $color-black-500;
+      display: inline-flex;
+      align-items: center;
+
+      /**
+       * This negative margin compensates for the 1px borders that
+       * bump up against each other.
+       */
+      min-width: $spacing-lg;
+
+      /**
+       * .75rem here makes the pagination the same height as text inputs
+       * for consistency's sake.
+       */
+      padding: .75rem $spacing-sm;
+      position: relative;
+      text-decoration: none;
+      transition: box-shadow .2s ease;
+      z-index: map.get($z-index, '100');
+    }
+
+    a:hover {
+      background-color: $color-black-100;
+    }
+
+    a:focus,
+    a[aria-current]:focus {
+      border-radius: inherit;
+      /* stylelint-disable */
+      box-shadow: 0 0 0 math.div($spacing-xxs, 2) $color-white-base, 0 0 0 $spacing-xxs $color-blue-600;
+      /* stylelint-enable */
+      outline: none;
+      z-index: map.get($z-index, '1000');
+    }
+
+    a[aria-current] {
+      box-shadow: 0 $spacing-xxs 0 $color-crimson-500;
+    }
+  }
+
+  /**
+   * Disabled state
+   */
+
+  &__item.is-disabled a {
+    color: $color-black-300;
+
+    &:hover {
+      background-color: transparent;
+      cursor: default;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
