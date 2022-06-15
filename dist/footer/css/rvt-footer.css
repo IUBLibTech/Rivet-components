@@ -23,9 +23,11 @@
     background-color: #006298
 }
 
+/* add font inherit */
 .rvt-footer-base {
+    font: inherit;
     background-color: #900;
-    color: #fff
+    color: #fff;
 }
 
 .rvt-footer-base__inner {
