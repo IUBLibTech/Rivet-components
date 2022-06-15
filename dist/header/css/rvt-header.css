@@ -354,7 +354,10 @@
     border-radius: 0;
     margin-left: -2px
 }
+
+/* add font:inherit for integrating IU font */
 .rvt-header-global {
+    font: inherit;
     padding-top: 1rem;
     padding-bottom: 1rem;
     position: relative;
