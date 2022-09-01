@@ -6,14 +6,15 @@
 #### Installation
 - Use "dist" components (e.g., header, footer) for plug-n-play HTML (more components will be added as needed)      
 - Add relevant "css" file to your application's "head". This CSS uses a "rvt" prefix on classes and is designed so that it will NOT override any other application components.   
+
 - Add Rivet javascript to your code (usually just before the closing "body" tag). 
 ```  
   <script src="https://unpkg.com/rivet-core@2.0.0-beta/js/rivet.min.js"></script>
   <script>Rivet.init();</script>
 ```       
-- For an interactive view of Rivet components, see the components library https://v2.rivet.iu.edu/docs/components/
-- Header https://v2.rivet.iu.edu/docs/components/header/
-- Footer https://v2.rivet.iu.edu/docs/components/footer/
+- For an interactive view of Rivet components, see the components library https://rivet.iu.edu/components/
+- Header https://rivet.iu.edu/components/header/
+- Footer https://rivet.iu.edu/components/footer/
 
 #### Fonts
 - CSS is set up to "inherit" a site's default font. 
