@@ -19,9 +19,10 @@
             </div>
           </a>
         </div>
-        <div class="rvt-header-global__controls" data-rvt-disclosure="menu">
-          <!-- Search wrapper -->
-          <div data-rvt-disclosure="search">
+        <!-- Header controls -->
+        <div class="rvt-header-global__controls">
+          <!-- Search -->
+          <div data-rvt-disclosure="search" data-rvt-close-click-outside>
             <!-- Button that shows/hides the search field -->
             <button class="rvt-global-toggle" data-rvt-disclosure-toggle="search" aria-expanded="false">
               <span class="rvt-sr-only">Search</span>
@@ -33,7 +34,7 @@
             <form action="/search" class="rvt-header-global__search" data-rvt-disclosure-target="search" role="search" method="get" hidden>
               <label class="rvt-sr-only" for="search">Search</label>
               <div class="rvt-input-group">
-                <input class="rvt-input-group__input rvt-text-input" type="text" name="q">
+                <input id="search" class="rvt-input-group__input rvt-text-input" type="text" name="q">
                 <div class="rvt-input-group__append">
                   <button class="rvt-button">Search</button>
                 </div>
