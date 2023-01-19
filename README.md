@@ -9,7 +9,7 @@
 
 - Add Rivet javascript to your code (usually just before the closing "body" tag). 
 ```  
-  <script src="https://unpkg.com/rivet-core@2.0.0-beta/js/rivet.min.js"></script>
+  <script src="https://unpkg.com/rivet-core@2.2.0/js/rivet.min.js"></script>
   <script>Rivet.init();</script>
 ```       
 - For an interactive view of Rivet components, see the components library https://rivet.iu.edu/components/
