@@ -5,8 +5,7 @@
 @use 'sass:math';
 
 .#{$prefix} {
-  &-input[type],
-  &-input:not([type]),
+  &-input,
   &-text-input,
   &-textarea,
   &-select {
@@ -33,7 +32,7 @@
 
   &-textarea {
     height: $spacing-base * 15;
-    line-height: 1.5;
+    line-height: $line-height-base;
     overflow: auto; // Remove scrollbar in IE
   }
 
@@ -79,16 +78,16 @@
   &-textarea:focus,
   &-select:focus {
     outline: none;
-    /* stylelint-disable */
-    box-shadow: 0 0 0 math.div($spacing-xxs, 2) $color-white-base, 0 0 0 $spacing-xxs $color-blue-600;
-    /* stylelint-enable */
-    transition: box-shadow .2s ease;
+    box-shadow: 0 0 0 math.div($spacing-xxs, 2) $color-blue-400;
   }
 
   &-label {
     display: inline-block;
     font-size: $ts-14;
-    line-height: 1;
+  }
+
+  &-label + * {
+    margin-top: $spacing-xxs;
   }
 
   &-fieldset {

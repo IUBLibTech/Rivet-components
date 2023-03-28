@@ -14,7 +14,7 @@ import keyCodes from '../utilities/keyCodes'
  *****************************************************************************/
 
 export default class Dropdown extends Component {
-  
+
   /****************************************************************************
    * Gets the dropdown's CSS selector.
    *
@@ -60,7 +60,7 @@ export default class Dropdown extends Component {
        * @private
        ***********************************************************************/
 
-       _initSelectors () {
+      _initSelectors () {
         this.toggleAttribute = 'data-rvt-dropdown-toggle'
         this.menuAttribute = 'data-rvt-dropdown-menu'
 
@@ -132,6 +132,7 @@ export default class Dropdown extends Component {
 
       connected () {
         Component.dispatchComponentAddedEvent(this.element)
+        Component.watchForDOMChanges(this, () => this._initMenuItems())
 
         this._addDocumentEventHandlers()
       },
@@ -152,6 +153,7 @@ export default class Dropdown extends Component {
 
       disconnected () {
         Component.dispatchComponentRemovedEvent(this.element)
+        Component.stopWatchingForDOMChanges(this)
 
         this._removeDocumentEventHandlers()
       },
@@ -173,7 +175,7 @@ export default class Dropdown extends Component {
       open () {
         if (this._toggleElementIsDisabled()) { return }
 
-        if (!this._eventDispatched('dropdownOpened')) { return }
+        if (!this._eventDispatched('DropdownOpened')) { return }
 
         this._setOpenState()
       },
@@ -198,6 +200,7 @@ export default class Dropdown extends Component {
       _setOpenState () {
         this.toggleElement.setAttribute('aria-expanded', 'true')
         this.menuElement.removeAttribute('hidden')
+        this.firstMenuItem.focus()
 
         this.isOpen = true
       },
@@ -209,7 +212,7 @@ export default class Dropdown extends Component {
       close () {
         if (!this._isOpen()) { return }
 
-        if (!this._eventDispatched('dropdownClosed')) { return }
+        if (!this._eventDispatched('DropdownClosed')) { return }
 
         this._setClosedState()
       },
@@ -260,7 +263,10 @@ export default class Dropdown extends Component {
        ***********************************************************************/
 
       onClick (event) {
-        if (this._eventOriginatedInsideMenu(event)) { return }
+        if (
+          this._eventOriginatedInsideMenu(event) || 
+          this._eventOriginatedInsideHyperlink(event)
+        ) { return }
 
         this._isOpen()
           ? this.close()
@@ -280,8 +286,20 @@ export default class Dropdown extends Component {
       },
 
       /************************************************************************
+       * Returns true if the given event originated inside a hyperlink.
+       *
+       * @private
+       * @param {Event} event - Event
+       * @returns {boolean} Event originated inside hyperlink
+       ***********************************************************************/
+
+      _eventOriginatedInsideHyperlink (event) {
+        return event.target.closest('a')
+      },
+
+      /************************************************************************
        * Handles click events broadcast to the document that are related to
-       * the dropdown but did not originate inside the modal itself.
+       * the dropdown but did not originate inside the dropdown itself.
        *
        * @param {Event} event - Click event
        ***********************************************************************/
@@ -295,14 +313,14 @@ export default class Dropdown extends Component {
       },
 
       /************************************************************************
-       * Returns true if the click event originated inside the dropdown.
+       * Returns true if the click event originated outside the dropdown.
        *
        * @param {Event} event - Click event
        * @returns {boolean} Event originated outside dropdown
        ***********************************************************************/
 
       _clickOriginatedOutsideDropdown (event) {
-        return ! this.element.contains(event.target)
+        return !this.element.contains(event.target)
       },
 
       /************************************************************************
@@ -393,6 +411,8 @@ export default class Dropdown extends Component {
        ***********************************************************************/
 
       _handleDownKey (event) {
+        event.preventDefault()
+
         if (!this._isOpen()) { this.open() }
 
         this._eventOriginatedInsideMenu(event)

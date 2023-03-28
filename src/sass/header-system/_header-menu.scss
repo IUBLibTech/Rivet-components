@@ -78,6 +78,22 @@
     margin: 0;
   }
 
+  &__item--current {
+    position: relative;
+    padding-left: .5rem;
+  }
+
+  &__item--current::before {
+    background-color: $color-crimson-500;
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: .25rem;
+  }
+
   &__item:not(:first-child) {
     border-top: 1px solid $color-black-100;
   }
@@ -95,7 +111,7 @@
   &__link:hover,
   &__link:focus {
     color: $color-blue-500;
-    outline: .125rem solid $color-blue-500;
+    outline: .125rem solid $color-blue-400;
     outline-offset: .125rem;
   }
 
@@ -145,6 +161,7 @@
     left: unset;
     font-size: $ts-14;
     align-items: center;
+    width: auto;
 
     &__list {
       display: flex;
@@ -179,6 +196,18 @@
       position: relative;
     }
 
+    &__item--current {
+      padding-left: 0;
+    }
+
+    &__item--current &__link {
+      color: $color-crimson-500;
+    }
+
+    &__item--current::before {
+      content: none;
+    }
+
     &__item--current::after {
       content: '';
       display: block;
@@ -187,6 +216,11 @@
       height: $spacing-xxs * 1.2;
       position: absolute;
       bottom: -$spacing-md * 1.1;
+    }
+
+    &__item--current &__toggle {
+      background-color: $color-orange-000;
+      color: $color-crimson-500;
     }
 
     &__submenu {
@@ -208,8 +242,11 @@
     }
 
     &__submenu a:hover {
-      background-color: $color-blue-500;
-      color: $color-white-base;
+      // These styles are marked !important to override the dropdown component's
+      // default styles for navigation items marked aria-current
+      background-color: $color-blue-500 !important;
+      color: $color-white-base !important;
+      box-shadow: none !important; 
     }
 
     &__submenu-item {

@@ -63,7 +63,7 @@
     text-decoration: none;
 
     &[aria-current] {
-      background-color: $color-black-000;
+      background-color: $color-orange-000;
     }
 
     &[aria-current]::before {
@@ -94,13 +94,21 @@
   }
 
   &__link[aria-current] + &__toggle {
-    background-color: $color-black-000;
+    background-color: $color-orange-000;
+
+    > svg {
+      color: $color-crimson-500;
+    }
   }
 
   &__link[aria-current] + &__toggle:hover,
   &__link[aria-current] + &__toggle:focus {
-    color: $color-black-500;
-    background-color: $color-black-100;
+    color: $color-blue-500;
+    background-color: $color-blue-000;
+
+    > svg {
+      color: $color-blue-500;
+    }
   }
 
   &__toggle {
@@ -126,14 +134,19 @@
     }
 
     &:focus {
-      outline: math.div($spacing-xxs, 2) solid $color-blue-500;
-      outline-offset: math.div($spacing-xxs, 2);
+      background-color: $color-blue-000;
+      color: $color-blue-500;
     }
 
-    &:focus,
     &:hover {
-      background: $color-blue-500;
-      color: $color-white-base;
+      background-color: $color-blue-000;
+      color: $color-blue-600;
+    }
+
+    &:hover,
+    &:focus {
+      outline: math.div($spacing-xxs, 2) solid $color-blue-400;
+      outline-offset: math.div($spacing-xxs, 2);
     }
   }
 
