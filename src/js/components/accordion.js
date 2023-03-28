@@ -112,7 +112,9 @@ export default class Accordion extends Component {
        ***********************************************************************/
 
       _openAllPanels () {
-        this.panels.forEach((panel, index) => this._openPanel(index))
+        this.panels.forEach(panel => {
+          this.open(panel.getAttribute(this.panelAttribute))
+        })
       },
 
       /************************************************************************
@@ -148,6 +150,7 @@ export default class Accordion extends Component {
 
       connected () {
         Component.dispatchComponentAddedEvent(this.element)
+        Component.watchForDOMChanges(this)
       },
 
       /************************************************************************
@@ -156,6 +159,7 @@ export default class Accordion extends Component {
 
       disconnected () {
         Component.dispatchComponentRemovedEvent(this.element)
+        Component.stopWatchingForDOMChanges(this)
       },
 
       /************************************************************************
@@ -320,7 +324,7 @@ export default class Accordion extends Component {
           return
         }
 
-        if (!this._eventDispatched('accordionOpened', this.panelToOpen)) { return }
+        if (!this._eventDispatched('AccordionOpened', this.panelToOpen)) { return }
 
         this._openPanel()
       },
@@ -379,7 +383,7 @@ export default class Accordion extends Component {
           return
         }
 
-        if (!this._eventDispatched('accordionClosed', this.panelToClose)) { return }
+        if (!this._eventDispatched('AccordionClosed', this.panelToClose)) { return }
 
         this._closePanel()
       },

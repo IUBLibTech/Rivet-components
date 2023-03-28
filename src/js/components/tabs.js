@@ -56,8 +56,8 @@ export default class Tabs extends Component {
        ***********************************************************************/
 
       _initSelectors () {
-        this.tabAttribute = `data-rvt-tab`
-        this.panelAttribute = `data-rvt-tab-panel`
+        this.tabAttribute = 'data-rvt-tab'
+        this.panelAttribute = 'data-rvt-tab-panel'
 
         this.tabSelector = `[${this.tabAttribute}]`
         this.panelSelector = `[${this.panelAttribute}]`
@@ -83,6 +83,7 @@ export default class Tabs extends Component {
 
       connected () {
         Component.dispatchComponentAddedEvent(this.element)
+        Component.watchForDOMChanges(this)
 
         this._activateInitialTab()
       },
@@ -109,6 +110,7 @@ export default class Tabs extends Component {
 
       disconnected () {
         Component.dispatchComponentRemovedEvent(this.element)
+        Component.stopWatchingForDOMChanges(this)
       },
 
       /************************************************************************
@@ -160,18 +162,22 @@ export default class Tabs extends Component {
 
         switch (event.keyCode) {
           case keyCodes.left:
+            event.preventDefault()
             this._focusPreviousTab()
             break
 
           case keyCodes.right:
+            event.preventDefault()
             this._focusNextTab()
             break
 
           case keyCodes.home:
+            event.preventDefault()
             this._focusFirstTab()
             break
 
           case keyCodes.end:
+            event.preventDefault()
             this._focusLastTab()
             break
         }
@@ -295,7 +301,7 @@ export default class Tabs extends Component {
 
       _tabActivatedEventDispatched () {
         const dispatched = Component.dispatchCustomEvent(
-          'tabActivated',
+          'TabActivated',
           this.element,
           { tab: this.panelToActivate }
         )

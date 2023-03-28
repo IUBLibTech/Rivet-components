@@ -16,6 +16,10 @@
     border-radius: $spacing-xs;
   }
 
+  &[href]:focus {
+    transition: none;
+  }
+
   &__content {
     text-align: center;
   }
@@ -27,11 +31,12 @@
 
   &__number {
     font-size: $ts-41;
-    line-height: 1.2;
+    line-height: $line-height-tight;
   }
 
   &__description {
     color: $color-black-400;
+    font-weight: $font-weight-medium;
     font-size: $ts-14;
     letter-spacing: .025rem;
 

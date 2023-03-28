@@ -11,7 +11,7 @@ import { define } from 'wicked-elements'
  *****************************************************************************/
 
 export default class Component {
-  
+
   /****************************************************************************
    * Initializes all current and future instances of the component that are
    * added to the DOM.
@@ -89,7 +89,7 @@ export default class Component {
 
   static dispatchCustomEvent (eventName, element, detail = {}) {
     const prefix = globalSettings.prefix
-    const event = new CustomEvent(`${prefix}:${eventName}`, {
+    const event = new CustomEvent(`${prefix}${eventName}`, {
       bubbles: true,
       cancelable: true,
       detail
@@ -107,7 +107,7 @@ export default class Component {
    ***************************************************************************/
 
   static dispatchComponentAddedEvent (element) {
-    return this.dispatchCustomEvent('componentAdded', document, {
+    return this.dispatchCustomEvent('ComponentAdded', document, {
       component: element
     })
   }
@@ -121,8 +121,42 @@ export default class Component {
    ***************************************************************************/
 
   static dispatchComponentRemovedEvent (element) {
-    return this.dispatchCustomEvent('componentRemoved', document, {
+    return this.dispatchCustomEvent('ComponentRemoved', document, {
       component: element
     })
   }
+
+  /****************************************************************************
+   * Watches the component's DOM and updates references to child elements
+   * if the DOM changes. Accepts an optional callback to perform additional
+   * updates to the component on DOM change.
+   *
+   * @static
+   * @param {Object} self - Component instance
+   * @param {Function} callback - Optional callback
+   ***************************************************************************/
+
+  static watchForDOMChanges (self, callback = null) {
+    self.observer = new MutationObserver((mutationList, observer) => {
+      self._initElements()
+
+      if (callback) {
+        callback()
+      }
+    })
+
+    self.observer.observe(self.element, { childList: true, subtree: true })
+  }
+
+  /****************************************************************************
+   * Stop watching the component's DOM for changes.
+   *
+   * @static
+   * @param {Object} self - Component instance
+   ***************************************************************************/
+
+  static stopWatchingForDOMChanges (self) {
+    self.observer.disconnect()
+  }
+
 }
