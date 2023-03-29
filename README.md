@@ -29,9 +29,10 @@
 @use 'utilities/display'; 
 
 // footer.css compiled from  
-@use 'defaults';  
-@use 'grid';
-@use 'footer-system';  
+@use 'defaults';
+@use 'footer-system';   
+@use 'grid';  
+@use 'utilities/display';  
 ```
 
 #### Source
