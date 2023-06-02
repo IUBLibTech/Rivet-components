@@ -2,7 +2,7 @@
 ### Lightweight set of assets adapted from IU's Rivet Design System to install up-to-date branding in IUL open source projects.
 
 #### Installation
-- Use "dist" components (e.g., header, footer) for plug-n-play HTML (more components will be added as needed)      
+- Use "dist" components for plug-n-play HTML (more components will be added as needed)      
 - Add relevant "css" file to your application's "head". This CSS uses a "rvt" prefix on classes and is designed so that it will NOT override any other application components.   
 
 - Add Rivet javascript to your code (usually just before the closing "body" tag). Be sure to include 'Rivet.init' as shown. 
@@ -13,7 +13,7 @@
 - For an interactive view of Rivet components, see the components library https://rivet.iu.edu/components/
 - Header https://rivet.iu.edu/components/header/
 - Footer https://rivet.iu.edu/components/footer/
-- https://rivet.iu.edu/components/card/
+- Card https://rivet.iu.edu/components/card/
 
 #### Fonts
 - UPDATE: each stylesheet includes IU spec fonts 
