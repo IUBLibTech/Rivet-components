@@ -1,7 +1,5 @@
 # Rivet branding components for IUL
-
-### Lightweight set of assets adapted from IU's Rivet Design System       
-### Install up-to-date branding in IUL open source projects.
+### Lightweight set of assets adapted from IU's Rivet Design System to install up-to-date branding in IUL open source projects.
 
 #### Installation
 - Use "dist" components (e.g., header, footer) for plug-n-play HTML (more components will be added as needed)      
@@ -15,11 +13,13 @@
 - For an interactive view of Rivet components, see the components library https://rivet.iu.edu/components/
 - Header https://rivet.iu.edu/components/header/
 - Footer https://rivet.iu.edu/components/footer/
+- https://rivet.iu.edu/components/card/
 
 #### Fonts
 - UPDATE: each stylesheet includes IU spec fonts 
 
 #### Build details using NPM 'rivet-source' SASS
+NPM package at https://www.npmjs.com/package/rivet-core
 ```
 // header.css compiled from  
 @use 'defaults';  
@@ -33,6 +33,10 @@
 @use 'footer-system';   
 @use 'grid';  
 @use 'utilities/display';  
+
+// card.css compiled from
+@use 'card';
+@use 'grid';
 ```
 
 #### Source
