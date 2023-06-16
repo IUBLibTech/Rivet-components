@@ -1,4 +1,4 @@
-# Rivet branding components for IUL
+## Rivet branding components for IUL
 ### Lightweight set of assets adapted from IU's Rivet Design System to install up-to-date branding in IUL open source projects.
 
 #### Installation
@@ -7,13 +7,15 @@
 
 - Add Rivet javascript to your code (usually just before the closing "body" tag). Be sure to include 'Rivet.init' as shown. 
 ```  
-  <script src="https://unpkg.com/rivet-core@2.3.1/js/rivet.min.js"></script>
+  <script src="https://unpkg.com/rivet-core@2.4.0/js/rivet.min.js"></script>
   <script>Rivet.init();</script>
-```       
+```
+      
 - For an interactive view of Rivet components, see the components library https://rivet.iu.edu/components/
 - Header https://rivet.iu.edu/components/header/
 - Footer https://rivet.iu.edu/components/footer/
 - Card https://rivet.iu.edu/components/card/
+- Tabs https://rivet.iu.edu/components/tabs/, includes tabs-specific js. 
 
 #### Fonts
 - UPDATE: each stylesheet includes IU spec fonts 
@@ -37,6 +39,7 @@ NPM package at https://www.npmjs.com/package/rivet-core
 // card.css compiled from
 @use 'card';
 @use 'grid';
+
 ```
 
 #### Source
