@@ -1,0 +1,86 @@
+.rvt-tabs {
+    background-color: #fff;
+    border: 1px solid #e2e7e9;
+    border-radius: .5rem
+}
+
+.rvt-tabs__tablist {
+    display: flex;
+    flex-wrap: wrap
+}
+
+.rvt-tabs__tab {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    border-bottom: 1px solid #e2e7e9;
+    color: #243142;
+    cursor: pointer;
+    flex-grow: 1;
+    line-height: 1;
+    padding: 1rem 1rem;
+    position: relative;
+    z-index: 100
+}
+
+.rvt-tabs__tab:not(:first-child) {
+    border-left: 1px solid #e2e7e9;
+    margin-left: -1px
+}
+
+.rvt-tabs__tab:hover {
+    background-color: #edfafd;
+    color: #006298
+}
+
+.rvt-tabs__tab:hover::after {
+    background-color: #006298;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: .25rem;
+    left: 0;
+    position: absolute;
+    width: 100%
+}
+
+.rvt-tabs__tab:focus {
+    outline: .125rem solid #328bb8;
+    outline-offset: .125rem;
+    background-color: #edfafd
+}
+
+.rvt-tabs__tab:focus:not(:focus-visible) {
+    outline: none
+}
+
+.rvt-tabs__tab[aria-selected=true] {
+    background-color: #fff3f0
+}
+
+.rvt-tabs__tab[aria-selected=true]:hover {
+    color: #243142
+}
+
+.rvt-tabs__tab[aria-selected=true]::after {
+    bottom: 0;
+    background-color: #900;
+    content: "";
+    display: block;
+    height: .25rem;
+    left: 0;
+    position: absolute;
+    width: 100%
+}
+
+.rvt-tabs__panel {
+    padding: 1rem
+}
+
+.rvt-tabs__panel:focus {
+    outline: .125rem solid #006298;
+    outline-offset: -0.125rem
+}
+
+.rvt-tabs__panel:focus:not(:focus-visible) {
+    outline: none
+}
