@@ -1,0 +1,134 @@
+/*!
+ * rivet-subnav - @version 2.5.0
+ *
+ * Copyright (C) 2018 The Trustees of Indiana University
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+/**
+ * Do not edit directly
+ * Generated on Wed, 28 Jun 2023 17:37:23 GMT
+ */
+@font-face {
+  font-family: BentonSans;
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.iu.edu/fonts/benton-sans-regular.eot");
+  src: url("https://fonts.iu.edu/fonts/benton-sans-regular.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/benton-sans-regular.woff") format("woff"), url("https://fonts.iu.edu/fonts/benton-sans-regular.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/benton-sans-regular.svg#BentonSansRegular") format("svg");
+  font-display: swap
+}
+
+@font-face {
+  font-family: BentonSans;
+  font-style: normal;
+  font-weight: 500;
+  src: url("https://fonts.iu.edu/fonts/benton-sans-medium.eot");
+  src: url("https://fonts.iu.edu/fonts/benton-sans-medium.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/benton-sans-medium.woff") format("woff"), url("https://fonts.iu.edu/fonts/benton-sans-medium.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/benton-sans-medium.svg#BentonSansMedium") format("svg");
+  font-display: swap
+}
+
+@font-face {
+  font-family: BentonSans;
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://fonts.iu.edu/fonts/benton-sans-bold.eot");
+  src: url("https://fonts.iu.edu/fonts/benton-sans-bold.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/benton-sans-bold.woff") format("woff"), url("https://fonts.iu.edu/fonts/benton-sans-bold.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/benton-sans-bold.svg#BentonSansRegular") format("svg");
+  font-display: swap
+}
+
+@font-face {
+  font-family: GeorgiaPro;
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-regular.eot");
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-regular.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/georgia-pro-regular.woff") format("woff"), url("https://fonts.iu.edu/fonts/georgia-pro-regular.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/georgia-pro-regular.svg#GeorgiaProRegular") format("svg");
+  font-display: swap
+}
+
+@font-face {
+  font-family: GeorgiaPro;
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-italic.eot");
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-italic.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/georgia-pro-italic.woff") format("woff"), url("https://fonts.iu.edu/fonts/georgia-pro-italic.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/georgia-pro-italic.svg#GeorgiaProItalic") format("svg");
+  font-display: swap
+}
+
+@font-face {
+  font-family: GeorgiaPro;
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-bold.eot");
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-bold.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/georgia-pro-bold.woff") format("woff"), url("https://fonts.iu.edu/fonts/georgia-pro-bold.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/georgia-pro-bold.svg#GeorgiaProBold") format("svg");
+  font-display: swap
+}
+
+.rvt-subnav {
+  overflow-x: auto;
+  border-bottom: 1px solid #e2e7e9;
+  -webkit-overflow-scrolling: auto
+}
+
+.rvt-subnav__list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding-top: .25rem;
+  padding-right: .25rem;
+  padding-left: .25rem
+}
+
+.rvt-subnav__item {
+  margin: 0;
+  flex-shrink: 0
+}
+
+.rvt-subnav__item a, .rvt-subnav__item button {
+  align-items: center;
+  border: none;
+  color: #243142;
+  display: flex;
+  font-size: .875rem;
+  padding: 1rem 1rem;
+  position: relative;
+  text-decoration: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none
+}
+
+.rvt-subnav__item a>svg, .rvt-subnav__item button>svg {
+  color: #75838f
+}
+
+.rvt-subnav__item a[aria-current] {
+  background-color: #fff3f0;
+  color: #900
+}
+
+.rvt-subnav__item a[aria-current]>svg {
+  color: #900
+}
+
+.rvt-subnav__item a[aria-current]::after, .rvt-subnav__item a:hover::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: .25rem;
+  bottom: 0;
+  left: 0;
+  background-color: #900;
+  position: absolute
+}
+
+.rvt-subnav__item a:hover:not([aria-current]), .rvt-subnav__item button:hover {
+  background-color: #edfafd;
+  color: #006298
+}
+
+.rvt-subnav__item a:hover:not([aria-current])>svg, .rvt-subnav__item button:hover>svg {
+  color: #006298
+}
+
+.rvt-subnav__item a:hover:not([aria-current])::after, .rvt-subnav__item button:hover::after {
+  background-color: #006298
+}

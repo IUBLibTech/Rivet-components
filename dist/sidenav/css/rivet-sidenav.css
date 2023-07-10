@@ -1,0 +1,208 @@
+/*!
+ * rivet-sidenav - @version 2.5.0
+ *
+ * Copyright (C) 2018 The Trustees of Indiana University
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+/**
+ * Do not edit directly
+ * Generated on Wed, 28 Jun 2023 17:37:23 GMT
+ */
+@font-face {
+  font-family: BentonSans;
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.iu.edu/fonts/benton-sans-regular.eot");
+  src: url("https://fonts.iu.edu/fonts/benton-sans-regular.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/benton-sans-regular.woff") format("woff"), url("https://fonts.iu.edu/fonts/benton-sans-regular.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/benton-sans-regular.svg#BentonSansRegular") format("svg");
+  font-display: swap
+}
+
+@font-face {
+  font-family: BentonSans;
+  font-style: normal;
+  font-weight: 500;
+  src: url("https://fonts.iu.edu/fonts/benton-sans-medium.eot");
+  src: url("https://fonts.iu.edu/fonts/benton-sans-medium.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/benton-sans-medium.woff") format("woff"), url("https://fonts.iu.edu/fonts/benton-sans-medium.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/benton-sans-medium.svg#BentonSansMedium") format("svg");
+  font-display: swap
+}
+
+@font-face {
+  font-family: BentonSans;
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://fonts.iu.edu/fonts/benton-sans-bold.eot");
+  src: url("https://fonts.iu.edu/fonts/benton-sans-bold.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/benton-sans-bold.woff") format("woff"), url("https://fonts.iu.edu/fonts/benton-sans-bold.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/benton-sans-bold.svg#BentonSansRegular") format("svg");
+  font-display: swap
+}
+
+@font-face {
+  font-family: GeorgiaPro;
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-regular.eot");
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-regular.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/georgia-pro-regular.woff") format("woff"), url("https://fonts.iu.edu/fonts/georgia-pro-regular.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/georgia-pro-regular.svg#GeorgiaProRegular") format("svg");
+  font-display: swap
+}
+
+@font-face {
+  font-family: GeorgiaPro;
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-italic.eot");
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-italic.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/georgia-pro-italic.woff") format("woff"), url("https://fonts.iu.edu/fonts/georgia-pro-italic.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/georgia-pro-italic.svg#GeorgiaProItalic") format("svg");
+  font-display: swap
+}
+
+@font-face {
+  font-family: GeorgiaPro;
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-bold.eot");
+  src: url("https://fonts.iu.edu/fonts/georgia-pro-bold.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/georgia-pro-bold.woff") format("woff"), url("https://fonts.iu.edu/fonts/georgia-pro-bold.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/georgia-pro-bold.svg#GeorgiaProBold") format("svg");
+  font-display: swap
+}
+
+.rvt-sidenav__label {
+  color: #900;
+  font-size: .875rem;
+  font-weight: 700;
+  display: block;
+  letter-spacing: .04rem;
+  text-transform: uppercase
+}
+
+.rvt-sidenav__list {
+  flex-basis: 100%;
+  list-style-type: none;
+  padding-left: 0
+}
+
+.rvt-sidenav__label+.rvt-sidenav__list {
+  margin-top: 1rem
+}
+
+.rvt-sidenav__list[hidden], .rvt-sidenav__list[aria-hidden=true] {
+  display: none
+}
+
+.rvt-sidenav__item {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0
+}
+
+.rvt-sidenav__item .rvt-sidenav__item {
+  border-left: .25rem solid #e2e7e9
+}
+
+.rvt-sidenav__item .rvt-sidenav__list {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem
+}
+
+.rvt-sidenav__item-wrapper {
+  display: flex;
+  flex-basis: 100%
+}
+
+.rvt-sidenav__link {
+  font-size: .875rem;
+  color: #243142;
+  flex-grow: 1;
+  padding-top: .5rem;
+  padding-right: .5rem;
+  padding-bottom: .5rem;
+  padding-left: 1rem;
+  position: relative;
+  text-decoration: none
+}
+
+.rvt-sidenav__link[aria-current] {
+  background-color: #fff3f0
+}
+
+.rvt-sidenav__link[aria-current]::before {
+  content: "";
+  display: block;
+  width: .25rem;
+  height: 100%;
+  background-color: #900;
+  position: absolute;
+  top: 0;
+  left: 0
+}
+
+.rvt-sidenav__link:focus, .rvt-sidenav__link:hover {
+  color: #006298;
+  text-decoration: underline
+}
+
+.rvt-sidenav__item .rvt-sidenav__item .rvt-sidenav__link {
+  padding-top: .3rem;
+  padding-bottom: .3rem
+}
+
+.rvt-sidenav__item>.rvt-sidenav__list .rvt-sidenav__link[aria-current]::before {
+  margin-left: -0.25rem
+}
+
+.rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle {
+  background-color: #fff3f0
+}
+
+.rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle>svg {
+  color: #900
+}
+
+.rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle:hover, .rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle:focus {
+  color: #006298;
+  background-color: #edfafd
+}
+
+.rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle:hover>svg, .rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle:focus>svg {
+  color: #006298
+}
+
+.rvt-sidenav__toggle {
+  color: #a0abb4;
+  align-items: center;
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  cursor: pointer;
+  display: none;
+  justify-content: center;
+  padding: 0 .5rem
+}
+
+.rvt-sidenav__toggle svg {
+  vertical-align: middle
+}
+
+.rvt-sidenav__toggle[aria-expanded] {
+  display: block
+}
+
+.rvt-sidenav__toggle[aria-expanded=true] {
+  transform: rotate(180deg)
+}
+
+.rvt-sidenav__toggle:focus {
+  background-color: #edfafd;
+  color: #006298
+}
+
+.rvt-sidenav__toggle:hover {
+  background-color: #edfafd;
+  color: #004f80
+}
+
+.rvt-sidenav__toggle:hover, .rvt-sidenav__toggle:focus {
+  outline: .125rem solid #328bb8;
+  outline-offset: .125rem
+}
+
+.rvt-sidenav__link:focus, .rvt-sidenav__toggle:focus {
+  z-index: 100
+}
