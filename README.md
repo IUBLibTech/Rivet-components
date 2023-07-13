@@ -46,6 +46,11 @@ Download and NPM install https://github.com/indiana-university/rivet-source
 // header-rivet.min.js
 import Disclosure from './components/disclosure'
 import Dropdown from './components/dropdown'
+
+// sidenav-rivet.min.js     
+import Disclosure from './components/disclosure'    
+import Dropdown from './components/dropdown'    
+import Sidenav from './components/sidenav'    
 ```    
 
 #### Source
