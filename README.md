@@ -3,7 +3,7 @@
 
 #### Installation
 In most cases do not use Rivet-provided CDN URLs for CSS & JS. This will risk collision with other elements in your application. 
-- Use "dist" components for plug-n-play HTML (more components will be added as needed)      
+- Use **"dist" components** for plug-n-play HTML (more components will be added as needed)      
 - Add relevant "css" file to your application's "head". This CSS uses a "rvt" prefix on classes and is designed so that it will NOT override any other application components.  
 - Add Rivet javascript to your code (usually just before the closing "body" tag). Be sure to include 'Rivet.init' as shown. 
 ```  
