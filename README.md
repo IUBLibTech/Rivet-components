@@ -1,5 +1,5 @@
 ## Rivet components for IUL
-### Lightweight set of assets for specific components (HTML, CSS, JS) adapted from IU's Rivet Design System. Use to install up-to-date branding and other Rivet-based components in an already exising applications. 
+### Lightweight set of assets for specific components (HTML, CSS, JS) adapted from IU's Rivet Design System. Use to install up-to-date branding and other Rivet-based components in already exising applications. 
 
 #### Installation
 In most cases do not use Rivet-provided CDN URLs for CSS & JS. This will risk collision with other elements in your application. 
