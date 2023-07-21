@@ -54,4 +54,5 @@ import Sidenav from './components/sidenav'
 ```    
 
 #### Source
-- "src" is a clone of source files from the active Rivet repository https://github.com/indiana-university/rivet-source/ 
+- "src" is a clone of source files from the active Rivet repository https://github.com/indiana-university/rivet-source/
+- uncompiled javascript, for example, can be found in '/src/js/components'
