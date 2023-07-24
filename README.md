@@ -58,3 +58,6 @@ Dist components (e.g., header, footer) with prepopulated links and content to be
 #### SRC directory     
 - "src" is a clone of source files from the active Rivet repository https://github.com/indiana-university/rivet-source/
 - uncompiled javascript, for example, can be found in '/src/js/components'
+
+##### Supported by Richard Higgins, Library Technologies, IU Bloomington Libraries. Rivet component builds are automated in the Design System source. If you have a project that will use only a specific set of components, I can help to to automate a custom build to meet your specific needs. 
+
