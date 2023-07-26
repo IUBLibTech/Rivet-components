@@ -1,0 +1,71 @@
+Searching & Borrowing <nolink>
+— Search in <nolink>
+—— Databases A-Z </databases>
+—— IUCAT - Our Catalog <https://iucat.iu.edu/catalog>
+—— Beyond IU Libraries <https://ub.relaisd2d.com/?LS=INDIANA-U&PI=INDIANA-U>
+— Search for <nolink>
+—— Research Guides <https://guides.libraries.indiana.edu/?b=s>
+—— Online Journals <https://kg6ek7cq2b.search.serialssolutions.com/ejp/?libHash=KG6EK7CQ2B#/?language=en-US&titleType=ALL>
+—— Digital Collections </digital-collections>
+—— Highlighted Collections </collections>
+— Request for <nolink>
+—— Physical materials <https://www.dds.indiana.edu/illiad/illiad.dll?Action=10&Form=21> *to be updated
+—— Digital materials or copies <https://www.dds.indiana.edu/illiad/illiad.dll?Action=10&Form=20&Value=GenericRequestRAD> *to be updated
+—— Material purchase </request-purchase>
+— How-to’s <nolink>
+—— Borrow, Renew, Return </borrow-renew-return>
+—— Request InterLibrary Loan </interlibrary-loan>
+—— Access materials off-campus </off-campus-access>
+—— Request books by mail </books-by-mail>
+—— Borrow as a distance student </distance-education>
+—— Borrow as a visitor </borrowers-card>
+—— Access unique materials </special-formats-archives>
+
+Researching & Teaching <nolink>
+— Researching <nolink>
+—— Researching Support </researching-support>
+—— Citing Support </citing-support>
+—— Publishing Support </publishing-support>
+—— Copyrighting Support </copyrighting-support>
+—— Help with Researching </help-researching>
+— Teaching <nolink>
+—— Course Reserves </course-reserves>
+—— Resources for Instructors </resources-instructors>
+—— Instructional Grants </instructional-grants>
+—— Faculty Study Rooms </faculty-study-rooms>
+—— Help with Instruction </help-instruction>
+
+Visiting & Studying <nolink>
+—— Our Hours </hours>
+—— Spaces </spaces>
+—— Spaces for graduate students </spaces-grad-students>
+—— Printers & Technology </printers-technology>
+—— Makerspace </makerspace>
+—— Parking </parking>
+—— Accessibility </building-accessibility>
+— For Visitors <nolink>
+—— Available services for visitors </visitor-services>
+
+What’s Happening? <nolink>
+— News </news>
+— Blog <https://blogs.libraries.indiana.edu/>
+— Events <https://events.iu.edu/libraries/>
+— Exhibitions </exhibitions>
+
+About Us <nolink>
+— Our Locations </hours>
+— About Us </about/administration or /about-us>
+— Alumni & Friends </development or /alumni-friends>
+— Our Diversity Initiatives </diversity-initiatives>
+— Jobs & Libraries HR </human-resources>
+— Our Departments </departments>
+— Our Staff </staff>
+— Contact Us </contact-us>
+
+IUCAT <https://iucat.iu.edu/catalog>
+
+Need Help? <nolink>
+— Chat with a Librarian <Link to open floating chat>
+— Help with Researching </help-researching>
+— Help with Instruction </help-instruction>
+— Help Us Help You - UX Research </ux-research>
