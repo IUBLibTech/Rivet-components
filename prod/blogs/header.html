@@ -33,12 +33,11 @@
             <!-- Navigation links -->
             <nav aria-label="Main" class="rvt-header-menu" data-rvt-disclosure-target="menu" hidden>
               <ul class="rvt-header-menu__list">
-                <!-- Navigation link with dropdown marked as the current page -->
-                <li class="rvt-header-menu__item rvt-header-menu__item--current">
+                <li class="rvt-header-menu__item">
                   <div class="rvt-header-menu__dropdown rvt-dropdown" data-rvt-dropdown="primary-nav-1">
                     <div class="rvt-header-menu__group">
                       <!-- Link that appears in header -->
-                      <a class="rvt-header-menu__link">Searching &<br>Borrowing</a>
+                      <a class="rvt-header-menu__link">Searching &amp; Borrowing</a>
                       <!-- Button that shows/hides dropdown links -->
                       <button aria-expanded="false" class="rvt-dropdown__toggle rvt-header-menu__toggle" data-rvt-dropdown-toggle="primary-nav-1">
                         <span class="rvt-sr-only">Toggle Sub-navigation</span>
@@ -56,7 +55,7 @@
                           <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/databases">Databases A-Z</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="http://iucat.iu.edu/?utm_source=nav&utm_medium=direct&utm_campaign=iul">IUCAT - Our Catalog</a>
+                          <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="https://iucat.iu.edu/catalog">IUCAT - Our Catalog</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
                           <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="https://ub.relaisd2d.com/?LS=INDIANA-U&PI=INDIANA-U">Libraries beyond IU</a>
@@ -65,7 +64,7 @@
                           <div class="rvt-dropdown__menu-heading" aria-hidden="true">Search for</div>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="https://guides.libraries.indiana.edu/?b=s">Research Guides - by Subject</a>
+                          <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="https://guides.libraries.indiana.edu/?b=s">Research Guides</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
                           <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="https://kg6ek7cq2b.search.serialssolutions.com/ejp/?libHash=KG6EK7CQ2B#/?language=en-US&titleType=ALL">Online Journals</a>
@@ -80,24 +79,33 @@
                           <div class="rvt-dropdown__menu-heading" aria-hidden="true">Request for</div>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="#">Physical materials</a>
+                          <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="https://www.dds.indiana.edu/illiad/illiad.dll?Action=10&Form=21">Physical materials</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="#">Digital materials or copies</a>
+                          <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="https://www.dds.indiana.edu/illiad/illiad.dll?Action=10&Form=20&Value=GenericRequestRAD">Digital materials or copies</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/request-purchase">Material purchase</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/material-purchase">Material purchase</a>
                         </li>
                         <li>
                           <div class="rvt-header-menu__dropdown rvt-dropdown" data-rvt-dropdown="primary-nav-1">
-                          <div class="rvt-header-menu__group">
-                          <div class="rvt-dropdown__menu-heading" aria-hidden="true">How-to's</div>
-                          <!-- Button that shows/hides dropdown links -->
+			  <div class="rvt-header-menu__group">
+
+	     <!-- Hack to force secondary dropdown to display close to normal -->
+                       <div class="rvt-header-menu__group">
+                          <a class="rvt-header-menu__link" style="font-weight:700;">How to do ...?</a>
+                          <button aria-expanded="false" class="rvt-dropdown__toggle rvt-header-menu__toggle" data-rvt-dropdown-toggle="primary-nav-1" aria-haspopup="true" style="width:unset;">
+                          <span class="rvt-sr-only">Toggle Sub-navigation</span>
+                          <svg class="rvt-global-toggle__open" fill="currentColor" width="16" height="16" viewBox="0 0 16 16" focusable="false"><path d="m15.146 6.263-1.292-1.526L8 9.69 2.146 4.737.854 6.263 8 12.31l7.146-6.047Z"></path></svg>
+                          </button>
+			  </div>
+
+                         <!-- <div class="rvt-dropdown__menu-heading" aria-hidden="true">How do I ...?</div>
                           <button aria-expanded="false" class="rvt-dropdown__toggle rvt-header-menu__toggle" data-rvt-dropdown-toggle="primary-nav-1">
                           <span class="rvt-sr-only">Toggle Sub-navigation</span>
                           <svg class="rvt-global-toggle__open" fill="currentColor" width="16" height="16" viewBox="0 0 16 16"><path d="m15.146 6.263-1.292-1.526L8 9.69 2.146 4.737.854 6.263 8 12.31l7.146-6.047Z"></path></svg>
                           </button>
-                          </div>
+                          </div> -->
                           <!-- Dropdown menu -->
                           <div class="rvt-header-menu__submenu rvt-dropdown__menu rvt-dropdown__menu--right" data-rvt-dropdown-menu="primary-nav-1" hidden>
                           <ul class="rvt-header-menu__submenu-list">
@@ -106,7 +114,7 @@
                               <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/borrow-renew-return">Borrow, Renew, Return</a>
                             </li>
                             <li class="rvt-header-menu__submenu-item">
-                              <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/request-materials">Request InterLibrary Loan</a>
+                              <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/request-materials">Request InterLibrary Loans</a>
                             </li>
                             <li class="rvt-header-menu__submenu-item">
                               <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/off-campus-access">Access materials off-campus</a>
@@ -115,13 +123,10 @@
                               <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/books-by-mail">Request Books by Mail</a>
                             </li>
                             <li class="rvt-header-menu__submenu-item">
-                              <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/distance-education-document-and-book-delivery">Borrow as a distance student</a>
+                              <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/distance-education">Borrow as a distance student</a>
                             </li>
                             <li class="rvt-header-menu__submenu-item">
                               <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/borrowers-card">Borrow as a visitor</a>
-                            </li>
-                            <li class="rvt-header-menu__submenu-item">
-                              <a class="rvt-header-menu__submenu-link" href="#">Access unique materials</a>
                             </li>
                           </ul>
                           </div>
@@ -132,11 +137,11 @@
                   </div>
                 </li>
                 <!-- Navigation link with dropdown marked as the current page -->
-                <li class="rvt-header-menu__item rvt-header-menu__item">
+                <li class="rvt-header-menu__item">
                   <div class="rvt-header-menu__dropdown rvt-dropdown" data-rvt-dropdown="primary-nav-1">
                     <div class="rvt-header-menu__group">
                       <!-- Link that appears in header -->
-                      <a class="rvt-header-menu__link">Researching &<br>Teaching</a>
+                      <a class="rvt-header-menu__link">Researching &amp; Teaching</a>
                       <!-- Button that shows/hides dropdown links -->
                       <button aria-expanded="false" class="rvt-dropdown__toggle rvt-header-menu__toggle" data-rvt-dropdown-toggle="primary-nav-1">
                         <span class="rvt-sr-only">Toggle Sub-navigation</span>
@@ -154,45 +159,42 @@
                           <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/researching-support">Researching Support</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Citing Support</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/citing-support">Citing Support</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Publishing Support</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/publishing-copyright-support">Publishing &amp; Copyright Support</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="">Copyrighting Support</a>
-                        </li>
-                        <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Help with Researching</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/help-researching">Help with Researching</a>
                         </li>
                         <li>
                           <div class="rvt-dropdown__menu-heading" aria-hidden="true">Teaching</div>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Course Reserves</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/course-reserves">Course Reserves</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
                           <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/resources-instructors">Resources for Instructors</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Instructional Grants</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/instructional-grants">Instructional Grants</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Faculty Study Rooms</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/faculty-study-rooms">Faculty Study Rooms</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Help with Instruction</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/help-instruction">Help with Instruction</a>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </li>
                 <!-- Navigation link with dropdown marked as the current page -->
-                <li class="rvt-header-menu__item rvt-header-menu__item">
+                <li class="rvt-header-menu__item">
                   <div class="rvt-header-menu__dropdown rvt-dropdown" data-rvt-dropdown="primary-nav-1">
                     <div class="rvt-header-menu__group">
                       <!-- Link that appears in header -->
-                      <a class="rvt-header-menu__link">Visiting &<br>Studying</a>
+                      <a class="rvt-header-menu__link">Visiting &amp; Studying</a>
                       <!-- Button that shows/hides dropdown links -->
                       <button aria-expanded="false" class="rvt-dropdown__toggle rvt-header-menu__toggle" data-rvt-dropdown-toggle="primary-nav-1">
                         <span class="rvt-sr-only">Toggle Sub-navigation</span>
@@ -210,36 +212,33 @@
                           <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="https://iub.libcal.com/allspaces">Spaces</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/graduate-carrels">Spaces for graduate students</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/spaces-grad-students">Spaces for grad students</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Printers & Technology</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/printers-technology">Printers &amp; Technology</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
                           <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/makerspace">Makerspace</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Parking</a>
-                        </li>
-                        <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Building Accessibility</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/accessibility">Accessibility</a>
                         </li>
                         <li>
-                          <div class="rvt-dropdown__menu-heading" aria-hidden="true">Visiting</div>
+                          <div class="rvt-dropdown__menu-heading" aria-hidden="true">For Visitors</div>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Available services for visitors</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/visitor-services">Available services for visitors</a>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </li>
                 <!-- Navigation link with dropdown marked as the current page -->
-                <li class="rvt-header-menu__item rvt-header-menu__item">
+                <li class="rvt-header-menu__item">
                   <div class="rvt-header-menu__dropdown rvt-dropdown" data-rvt-dropdown="primary-nav-1">
                     <div class="rvt-header-menu__group">
                       <!-- Link that appears in header -->
-                      <a class="rvt-header-menu__link">What's<br>Happening?</a>
+                      <a class="rvt-header-menu__link">What's &amp; Happening?</a>
                       <!-- Button that shows/hides dropdown links -->
                       <button aria-expanded="false" class="rvt-dropdown__toggle rvt-header-menu__toggle" data-rvt-dropdown-toggle="primary-nav-1">
                         <span class="rvt-sr-only">Toggle Sub-navigation</span>
@@ -254,7 +253,7 @@
                           <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/news">News</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="https://blogs.libraries.indiana.edu/">Blog</a>
+                          <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="https://blogs.libraries.indiana.edu/">Blogs</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
                           <a target="_blank" rel="noopener noreferrer" class="rvt-header-menu__submenu-link" href="https://events.iu.edu/libraries/">Events</a>
@@ -267,7 +266,7 @@
                   </div>
                 </li>
                 <!-- Navigation link with dropdown marked as the current page -->
-                <li class="rvt-header-menu__item rvt-header-menu__item">
+                <li class="rvt-header-menu__item">
                   <div class="rvt-header-menu__dropdown rvt-dropdown" data-rvt-dropdown="primary-nav-1">
                     <div class="rvt-header-menu__group">
                       <!-- Link that appears in header -->
@@ -286,16 +285,16 @@
                           <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/hours">Our Locations</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">About Us</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/about/administration">About Us</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Alumni & Friends</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/development">Alumni &amp; Friends</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/libraries-diversity-resources">Our Diversity Initiatives</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/libraries-'diversity'-resources">Diversity Resources</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/human-resources">Jobs & Libraries HR</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/human-resources">Jobs &amp; Libraries HR</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
                           <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/departments">Our Departments</a>
@@ -304,7 +303,7 @@
                           <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/staff">Our Staff</a>
                         </li>
                         <li class="rvt-header-menu__submenu-item">
-                          <a class="rvt-header-menu__submenu-link" href="#">Contact Us</a>
+                          <a class="rvt-header-menu__submenu-link" href="https://libraries.indiana.edu/contact-us">Contact Us</a>
                         </li>
                       </ul>
                     </div>
@@ -312,22 +311,21 @@
                 </li>
                <!-- Navigation link without dropdown -->
                 <li class="rvt-header-menu__item">
-                  <a class="rvt-button rvt-button--small" target="_blank" rel="noopener noreferrer" href="https://iucat.iu.edu/?utm_source=nav&utm_medium=direct&utm_campaign=iul">IUCAT</a>
+                  <a class="rvt-button rvt-header-menu__link rvt-button--plain rvt-c-button__header" target="_blank" rel="noopener noreferrer" href="https://iucat.iu.edu/catalog">IUCAT</a>
                 </li>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <!-- Navigation link with dropdown -->
                 <li>
                   <div class="rvt-dropdown" data-rvt-dropdown="example-dropdown">
-                    <button type="button" class="rvt-button rvt-button--small" data-rvt-dropdown-toggle>
+                    <button type="button" class="rvt-button rvt-header-menu__link rvt-button--plain rvt-c-button__header" data-rvt-dropdown-toggle>
                       <span class="rvt-dropdown__toggle-text">Need Help?</span>
                       <svg fill="currentColor" width="16" height="16" viewBox="0 0 16 16"><path d="m15.146 6.263-1.292-1.526L8 9.69 2.146 4.737.854 6.263 8 12.31l7.146-6.047Z"></path></svg>
                     </button>
                     <!-- Dropdown menu -->
                     <div class="rvt-dropdown__menu" data-rvt-dropdown-menu hidden>
                       <!-- Dropdown links -->
-                      <a href="#">Chat with a Librarian</a>
-                      <a href="#" aria-current="page">Help with Researching</a>
-                      <a href="#">Help with Instruction</a>
+                      <a href="https://libraries.indiana.edu/help">Chat with a Librarian</a>
+                      <a href="https://libraries.indiana.edu/help-researching">Help with Researching</a>
+                      <a href="https://libraries.indiana.edu/help-instruction">Help with Instruction</a>
                       <a href="https://libraries.indiana.edu/ux-research">Help Us Help You - UX Research</a>
                     </div>
                   </div>

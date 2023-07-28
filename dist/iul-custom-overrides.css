@@ -1,32 +1,60 @@
 /** rsh custom IUL header/footer overrides/additions ***/
+.rvt-footer-resources__heading {
+    display: inline-block;
+}
+
+.rvt-button--link {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    color: #006298;
+    font-weight: 500;
+    height: initial;
+    padding: 0;
+    display: inline-flex;
+    align-items: initial;
+    transition: none
+}
+
+.rvt-button--link:hover {
+    background-color: transparent;
+    color: #004f80
+}
+
 .rvt-c-button__header {
     border: .125rem solid #e2e7e9;
-    border-radius: 999px; /* to use default square shape .25rem; */
+    border-radius: 999px;
+    /* to use default square shape .25rem; */
     display: flex;
     line-height: .875rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem
 }
+
 .rvt-c-button__header:hover {
     background-color: #edfafd;
     border-color: #006298;
 }
+
 .rvt-button--plain {
-/*  border-color: transparent; */
-  background-color: transparent;
+    /*  border-color: transparent; */
+    background-color: transparent;
 }
+
 .rvt-footer-resources {
     background-color: #900;
     color: #fff;
     padding-bottom: 1rem;
 }
+
 .rvt-footer-resources__heading {
-    display:inline-block;
+    display: inline-block;
     background-color: #900;
     color: #fff;
     padding-bottom: 0;
     font-size: 1rem;
 }
+
 .rvt-c-button__footer {
     margin-top: 1rem;
     background-color: #ffffff;
@@ -44,27 +72,82 @@
     display: -ms-inline-flexbox;
     display: inline-flex;
 }
+
 .rvt-c-button__footer:visited {
     color: #990000;
 }
+
 .rvt-footer-base__link:visited {
-    color:#fff;
+    color: #fff;
 }
+
 .rvt-c-button__footer:hover, .rvt-c-button__footer:active {
     color: #ffffff;
     border: .125rem solid #fff;
     border-radius: 999px;
     background-color: #990000;
 }
+
 .rvt-c-button__footer:focus {
     box-shadow: 0 0 0 0.125rem #fff, 0 0 0 0.25rem #990000;
 }
+
 .rvt-c-icon-inline {
     display: inline-flex;
 }
-.rvt-icon > svg, rvt-icon > svg, rvt-icon:not(:defined)::before {
+
+.rvt-icon>svg, rvt-icon>svg, rvt-icon:not(:defined)::before {
     height: 1rem;
     width: 1rem;
     margin-right: 0.5rem;
     color: #A0ABB4;
+}
+
+span.tooltip {
+    /*   padding: 0px 5px; */
+    position: relative;
+    background: #900;
+    cursor: pointer;
+}
+
+.tooltip-info {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+span.tooltip::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 1.5em;
+    left: 1.0rem;
+    font-size: 0.85em;
+    padding: 1px 5px;
+    display: none;
+    color: white;
+    background: #020000;
+    opacity: 0.9;
+    border-radius: 4px;
+    transition: opacity 0.1s ease-out;
+    z-index: 99;
+    text-align: center;
+    min-width: 200px;
+}
+
+span:hover::before {
+    display: inline-block;
+}
+
+.tooltip.nav-icon::before {
+    min-width: 50px;
+    top: 2.1rem;
+    left: -0.5rem;
+}
+
+.rvt-header-menu__item {
+    max-width: 7rem;
+}
+
+.rvt-header-global__logo-slot {
+    margin-right: 2rem;
 }
