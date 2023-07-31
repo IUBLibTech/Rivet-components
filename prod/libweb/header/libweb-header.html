@@ -90,14 +90,22 @@
                         </li>
                         <li>
                           <div class="rvt-header-menu__dropdown rvt-dropdown" data-rvt-dropdown="primary-nav-1">
-                          <div class="rvt-header-menu__group">
-                          <div class="rvt-dropdown__menu-heading" aria-hidden="true">How-to's</div>
-                          <!-- Button that shows/hides dropdown links -->
-                          <button aria-expanded="false" class="rvt-dropdown__toggle rvt-header-menu__toggle" data-rvt-dropdown-toggle="primary-nav-1">
-                          <span class="rvt-sr-only">Toggle Sub-navigation</span>
-                          <svg class="rvt-global-toggle__open" fill="currentColor" width="16" height="16" viewBox="0 0 16 16"><path d="m15.146 6.263-1.292-1.526L8 9.69 2.146 4.737.854 6.263 8 12.31l7.146-6.047Z"></path></svg>
-                          </button>
-                          </div>
+
+                  <!-- Hack to force secondary dropdown to display close to normal -->
+                       <div class="rvt-header-menu__group">
+                        <a class="rvt-header-menu__link" style="font-weight:700;">How do I ...?</a>
+                        <button aria-expanded="false" class="rvt-dropdown__toggle rvt-header-menu__toggle" data-rvt-dropdown-toggle="primary-nav-1" aria-haspopup="true" style="width:unset;">
+                        <span class="rvt-sr-only">Toggle Sub-navigation</span>
+                        <svg class="rvt-global-toggle__open" fill="currentColor" width="16" height="16" viewBox="0 0 16 16" focusable="false"><path d="m15.146 6.263-1.292-1.526L8 9.69 2.146 4.737.854 6.263 8 12.31l7.146-6.047Z"></path></svg>
+                        </button>
+                        </div>
+
+                       <!-- <div class="rvt-dropdown__menu-heading" aria-hidden="true">How do I ...?</div>
+                        <button aria-expanded="false" class="rvt-dropdown__toggle rvt-header-menu__toggle" data-rvt-dropdown-toggle="primary-nav-1">
+                        <span class="rvt-sr-only">Toggle Sub-navigation</span>
+                        <svg class="rvt-global-toggle__open" fill="currentColor" width="16" height="16" viewBox="0 0 16 16"><path d="m15.146 6.263-1.292-1.526L8 9.69 2.146 4.737.854 6.263 8 12.31l7.146-6.047Z"></path></svg>
+                        </button>
+                        </div> -->
                           <!-- Dropdown menu -->
                           <div class="rvt-header-menu__submenu rvt-dropdown__menu rvt-dropdown__menu--right" data-rvt-dropdown-menu="primary-nav-1" hidden>
                           <ul class="rvt-header-menu__submenu-list">

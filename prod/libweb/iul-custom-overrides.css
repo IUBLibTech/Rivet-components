@@ -12,10 +12,12 @@
     align-items: initial;
     transition: none
 }
+
 .rvt-button--link:hover {
     background-color: transparent;
     color: #004f80
 }
+
 .rvt-c-button__header {
     border: .125rem solid #e2e7e9;
     border-radius: 999px;
@@ -25,6 +27,7 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem
 }
+
 .rvt-c-button__header:hover {
     background-color: #edfafd;
     border-color: #006298;
@@ -152,4 +155,12 @@ span:hover::before {
     min-width: 50px;
     top: 2.1rem;
     left: -0.5rem;
+}
+
+@media screen and (min-width: 46.25em) .rvt-footer-resources__list.second-column {
+    margin-top: 2.7rem;
+}
+
+.rvt-input-group__append .rvt-button {
+    z-index:unset;
 }
