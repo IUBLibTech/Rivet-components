@@ -25,14 +25,12 @@ In most cases do not use Rivet-provided CDN URLs for CSS & JS. This will risk co
 NPM package at https://www.npmjs.com/package/rivet-core
 ```
 // header.css compiled from  
-@use 'core';    
-@use 'defaults';  
 @use 'header-system';  
-@use 'grid';  
+@use 'grid';
+@use 'disclosure';    
+@use 'dropdown';  
 
 // footer.css compiled from
-@use 'core';    
-@use 'defaults';
 @use 'footer-system';   
 @use 'grid';   
 
