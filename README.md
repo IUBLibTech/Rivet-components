@@ -20,6 +20,7 @@ In most cases do not use Rivet-provided CDN URLs for CSS & JS. This will risk co
 ##### Fonts
 - UPDATE: each stylesheet includes IU spec fonts 
 
+#### CSS
 ##### Examples of build details using NPM 'rivet-source' SASS
 NPM package at https://www.npmjs.com/package/rivet-core
 ```
@@ -40,6 +41,7 @@ NPM package at https://www.npmjs.com/package/rivet-core
 @use 'grid';
 
 ```
+#### JS
 ##### Examples of build details using NPM 'rivet-source' JS
 Download and NPM install https://github.com/indiana-university/rivet-source
 ```    
