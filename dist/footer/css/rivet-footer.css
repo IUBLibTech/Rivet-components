@@ -1,7 +1,7 @@
-/** Copyright (C) 2018 The Trustees of Indiana University
- * SPDX-License-Identifier: BSD-3-Clause
- * footer-system + grid - @version 2.5.0 **/
-
+/*!
+ * rivet-core - @version 2.6.0
+ * rivet-dropdown.css
+ */
 @font-face {
     font-family: BentonSans;
     font-style: normal;
@@ -55,7 +55,6 @@
     src: url("https://fonts.iu.edu/fonts/georgia-pro-bold.eot?#iefix") format("embedded-opentype"), url("https://fonts.iu.edu/fonts/georgia-pro-bold.woff") format("woff"), url("https://fonts.iu.edu/fonts/georgia-pro-bold.ttf") format("truetype"), url("https://fonts.iu.edu/fonts/georgia-pro-bold.svg#GeorgiaProBold") format("svg");
     font-display: swap
 }
-
 
 .rvt-footer-social a:focus, .rvt-footer-resources a:focus, .rvt-footer-base a:focus {
     outline-color: #fff

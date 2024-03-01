@@ -1,3 +1,7 @@
+/*!
+ * rivet-core - @version 2.6.0
+ * rivet-dropdown.css
+ */
 @font-face {
     font-family: BentonSans;
     font-style: normal;
@@ -109,11 +113,11 @@
     text-decoration: none
 }
 
-.rvt-sidenav__link[aria-current] {
+.rvt-sidenav__link[aria-current=page] {
     background-color: #fff3f0
 }
 
-.rvt-sidenav__link[aria-current]::before {
+.rvt-sidenav__link[aria-current=page]::before {
     content: "";
     display: block;
     width: .25rem;
@@ -134,24 +138,24 @@
     padding-bottom: .3rem
 }
 
-.rvt-sidenav__item>.rvt-sidenav__list .rvt-sidenav__link[aria-current]::before {
+.rvt-sidenav__item>.rvt-sidenav__list .rvt-sidenav__link[aria-current=page]::before {
     margin-left: -0.25rem
 }
 
-.rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle {
+.rvt-sidenav__link[aria-current=page]+.rvt-sidenav__toggle {
     background-color: #fff3f0
 }
 
-.rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle>svg {
+.rvt-sidenav__link[aria-current=page]+.rvt-sidenav__toggle>svg {
     color: #900
 }
 
-.rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle:hover, .rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle:focus {
+.rvt-sidenav__link[aria-current=page]+.rvt-sidenav__toggle:hover, .rvt-sidenav__link[aria-current=page]+.rvt-sidenav__toggle:focus {
     color: #006298;
     background-color: #edfafd
 }
 
-.rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle:hover>svg, .rvt-sidenav__link[aria-current]+.rvt-sidenav__toggle:focus>svg {
+.rvt-sidenav__link[aria-current=page]+.rvt-sidenav__toggle:hover>svg, .rvt-sidenav__link[aria-current=page]+.rvt-sidenav__toggle:focus>svg {
     color: #006298
 }
 
@@ -338,17 +342,17 @@
     box-shadow: inset 0 0 0 .125rem #006298
 }
 
-.rvt-dropdown__menu a.rvt-is-selected, .rvt-dropdown__menu a[aria-current], .rvt-dropdown__menu a[aria-checked=true], .rvt-dropdown__menu button.rvt-is-selected, .rvt-dropdown__menu button[aria-current], .rvt-dropdown__menu button[aria-checked=true] {
+.rvt-dropdown__menu a.rvt-is-selected, .rvt-dropdown__menu a[aria-current]:not([aria-current=false]), .rvt-dropdown__menu a[aria-checked=true], .rvt-dropdown__menu button.rvt-is-selected, .rvt-dropdown__menu button[aria-current]:not([aria-current=false]), .rvt-dropdown__menu button[aria-checked=true] {
     box-shadow: inset .25rem 0 0 #900;
     background-color: #fff3f0;
     color: #900
 }
 
-.rvt-dropdown__menu a.rvt-is-selected:hover, .rvt-dropdown__menu a[aria-current]:hover, .rvt-dropdown__menu a[aria-checked=true]:hover, .rvt-dropdown__menu button.rvt-is-selected:hover, .rvt-dropdown__menu button[aria-current]:hover, .rvt-dropdown__menu button[aria-checked=true]:hover {
+.rvt-dropdown__menu a.rvt-is-selected:hover, .rvt-dropdown__menu a[aria-current]:not([aria-current=false]):hover, .rvt-dropdown__menu a[aria-checked=true]:hover, .rvt-dropdown__menu button.rvt-is-selected:hover, .rvt-dropdown__menu button[aria-current]:not([aria-current=false]):hover, .rvt-dropdown__menu button[aria-checked=true]:hover {
     color: #900
 }
 
-.rvt-dropdown__menu a.rvt-is-selected:focus, .rvt-dropdown__menu a[aria-current]:focus, .rvt-dropdown__menu a[aria-checked=true]:focus, .rvt-dropdown__menu button.rvt-is-selected:focus, .rvt-dropdown__menu button[aria-current]:focus, .rvt-dropdown__menu button[aria-checked=true]:focus {
+.rvt-dropdown__menu a.rvt-is-selected:focus, .rvt-dropdown__menu a[aria-current]:not([aria-current=false]):focus, .rvt-dropdown__menu a[aria-checked=true]:focus, .rvt-dropdown__menu button.rvt-is-selected:focus, .rvt-dropdown__menu button[aria-current]:not([aria-current=false]):focus, .rvt-dropdown__menu button[aria-checked=true]:focus {
     box-shadow: inset .25rem 0 0 #006298, inset 0 0 0 .125rem #006298 !important
 }
 
