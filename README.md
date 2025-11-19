@@ -1,3 +1,5 @@
+#### This repository will no longer be updated ####
+
 ### Rivet components for IUL
 ##### Lightweight set of assets for specific components (HTML, CSS, JS) adapted from IU's Rivet Design System. Use to install up-to-date branding and other Rivet-based components in already exising applications. 
 
